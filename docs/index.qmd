@@ -26,9 +26,14 @@ Key attributes include:
 
 -   **Proximity metrics:** Distances to urban centers, primary, secondary, and tertiary water sources.
 
--   **Predictive assessments:** Predicted functionality over time, providing insights into future reliability.
+**Analysis Goals:**\
+The primary goals of analyzing this dataset are:
 
-This dataset serves as a detailed resource for monitoring water access and quality in Uganda, supporting analysis of water point functionality, population coverage, management effectiveness, and planning for rehabilitation or new installations.
+1.  **Monitoring and Evaluation (M&E):** Assess the operational status and functionality of water points across different regions to track performance, identify trends, and support evidence-based decision-making.
+
+2.  **Risk Assessment:** Identify areas at higher risk of water point failure, contamination, or insufficient coverage to prioritize interventions, rehabilitation, and resource allocation.
+
+This dataset serves as a detailed resource for monitoring water access and quality in Uganda, supporting strategic planning, management effectiveness assessment, and risk-informed decision-making for water infrastructure.
 
 ## Import
 
