@@ -1,0 +1,46 @@
+---
+title: "My Project"
+format: html
+editor: visual
+---
+
+## Uganda Waterpoints
+
+This dataset provides comprehensive information on **water points across Uganda**. This dataset is a free dataset shared through [The Humanitatian Data Exchange](https://data.humdata.org/dataset/wpdx_uga "Uganda Water points Data"). Each entry represents an individual water source, such as a well or a rainwater harvesting system, with associated details covering location, type, functionality, management, and usage.
+
+Key attributes include:
+
+-    **Geographical information:** Latitude, longitude, and administrative divisions (region, district, sub-county).
+
+-   **Water source and technology:** The type of water source (e.g., protected well, rainwater harvesting) and the technology used.
+
+-   **Operational status:** Whether the water point is functional or non-functional.
+
+-   **Management and governance:** How the water point is managed (community-managed, fee-based, etc.) and the organization responsible.
+
+-   **Installation and maintenance history:** Year of installation, rehabilitation records, and organizations involved.
+
+-   **Population served:** The number of people served within the vicinity of the water point.
+
+-   **Water quality indicators:** Includes parameters such as fecal contamination presence and subjective quality assessments.
+
+-   **Proximity metrics:** Distances to urban centers, primary, secondary, and tertiary water sources.
+
+-   **Predictive assessments:** Predicted functionality over time, providing insights into future reliability.
+
+This dataset serves as a detailed resource for monitoring water access and quality in Uganda, supporting analysis of water point functionality, population coverage, management effectiveness, and planning for rehabilitation or new installations.
+
+## Import
+
+To load the data, you should first load the required libraries to use:
+
+```{r}
+library(tidyverse)
+```
+
+Now, load your dataset like this
+
+```{r}
+#| echo: false
+read_csv(here::here("data/raw/wpdx_enhanced.csv"))
+```
