@@ -10,7 +10,7 @@ This dataset provides comprehensive information on **water points across Uganda*
 
 Key attributes include:
 
--    **Geographical information:** Latitude, longitude, and administrative divisions (region, district, sub-county).
+-   **Geographical information:** Latitude, longitude, and administrative divisions (region, district, sub-county).
 
 -   **Water source and technology:** The type of water source (e.g., protected well, rainwater harvesting) and the technology used.
 
