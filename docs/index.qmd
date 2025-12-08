@@ -41,11 +41,61 @@ To load the data, you should first load the required libraries to use:
 
 ```{r}
 library(tidyverse)
+library(here)
+library(lubridate)
 ```
 
 Now, load your dataset like this
 
 ```{r}
 #| echo: false
-read_csv(here::here("data/raw/wpdx_enhanced.csv"))
+data <- read_csv(here::here("data/raw/wpdx_enhanced.csv"))
+```
+
+Now, we will write code to bring your data into a state where it’s ready for analysis.
+
+-   Rename columns with `rename()`
+
+-   Select columns that are relevant with `select()`
+
+-   Remove missing values with `filter()` or `drop_na()`
+
+-   Join several dataframes with `left_join()`, `right_join()`, etc.
+
+-   Create new variables with `mutate()`
+
+```{r}
+#| echo: false 
+data <- data |>
+   select(
+    -c(
+      prediction_yes_0y,
+      prediction_yes_2y,
+      prediction_no_0y,
+      prediction_no_2y,
+      clean_adm1,
+      clean_adm2,
+      clean_adm3,
+      clean_adm4,
+      activity_id,
+      scheme_id,
+      notes,
+      wpdx_id,
+      predicted_status_0y,
+      predicted_status_2y,
+      predicted_category
+    )
+  ) |>
+  rename(water_source_type = water_source_clean) |>
+  mutate(report_date = mdy(report_date)) |>
+  mutate(report_date = format(report_date, "%d/%m/%Y"))
+ 
+  colnames(data)
+```
+
+Save the processed data into a CSV file
+
+```{r}
+write_csv(data,
+          here::here("data/processed/my-processed-data.csv"))
 ```
