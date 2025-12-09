@@ -99,3 +99,51 @@ Save the processed data into a CSV file
 write_csv(data,
           here::here("data/processed/my-processed-data.csv"))
 ```
+
+## Visualization
+
+Visualization is important because it visually represents the data. The dataset used, we will visualize 2 graphs:
+
+### 1. Bar graph of impacted people by the resource type
+
+```{r}
+# Summarize population affected by water point status
+population_status <- data %>%
+  group_by(status_clean) %>%
+  summarize(total_population = sum(assigned_population, na.rm = TRUE))
+
+# Plot
+ggplot(population_status, aes(x = status_clean, y = total_population, fill = status_clean)) +
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  labs(
+    title = "Population Affected by Water Point Functionality",
+    x = "Water Point Status",
+    y = "Total Population Affected"
+  ) +
+  theme_minimal() +
+  scale_y_continuous(labels = scales::label_number(big.mark = ",")) +
+  scale_fill_brewer(palette = "Set2") +
+  geom_text(aes(label = scales::label_number(big.mark = ",")(total_population)), hjust = -0.1) +
+   theme(legend.position = "none")
+
+```
+
+### 2. Scatter Plot (Criticality vs Pressure)
+
+This scatter plot shows the relationship between **pressure** (how heavily a water point is used) and **criticality** (how essential or high-risk the water point is).
+
+```{r}
+data |> 
+  drop_na(pressure, criticality) |>
+  ggplot(aes(x = pressure, y = criticality)) +
+  geom_point(alpha = 0.4, size = 2, color = "steelblue") +
+  geom_smooth(method = "loess", se = FALSE, color = "red") +
+  labs(
+    title = "Criticality vs Pressure",
+    x = "Pressure (Usage Pressure)",
+    y = "Criticality Score"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
