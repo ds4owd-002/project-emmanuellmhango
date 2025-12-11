@@ -3,6 +3,7 @@ title: "My Project"
 format: html
 editor: visual
 author: "Emmanuel Mhango"
+bibliography: bibliography.bib
 ---
 
 ## Uganda Waterpoints
@@ -196,4 +197,12 @@ fmt_number(
 
 In @tbl-statistics, you can see that standard deviation is generally big. The High SD means that the population assigned to water points varies hugely. Some water points serve very few people, others serve more.
 
-Futhermore,in the same @tbl-statistics, the small mean and median but larger SD for pressure suggests that pressure values are skewed. some points have extreme under usage unlike others.
+Furthermore,in the same @tbl-statistics, the small mean and median but larger SD for pressure suggests that pressure values are skewed. some points have extreme under usage unlike others.
+
+## Bibliography
+
+[@wpdx_uga]
+
+[@nsubuga2014water]
+
+[@wickham2019]

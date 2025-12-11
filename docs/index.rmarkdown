@@ -3,6 +3,7 @@ title: "My Project"
 format: html
 editor: visual
 author: "Emmanuel Mhango"
+bibliography: bibliography.bib
 ---
 
 ## Uganda Waterpoints
@@ -41,9 +42,16 @@ This dataset serves as a detailed resource for monitoring water access and quali
 To load the data, you should first load the required libraries to use:
 
 ```{r}
+#| echo: false
+#| warning: false
 library(tidyverse)
 library(here)
 library(lubridate)
+library(gt)
+library(gtsummary)
+library(knitr)
+library(DT)
+library(dplyr)
 ```
 
 Now, load your dataset like this
@@ -92,8 +100,6 @@ data <- data |>
   rename(water_source_type = water_source_clean) |>
   mutate(report_date = mdy(report_date)) |>
   mutate(report_date = format(report_date, "%d/%m/%Y"))
- 
-  colnames(data)
 ```
 
 Save the processed data into a CSV file
@@ -161,13 +167,43 @@ data |>
 
 ## Summary of the 5 selected data variables
 
-| \# | Variable | Description | Total | Mean | Median | Std. Dev |
-|----|----|----|----|----|----|----|
-| 1 | local_population | Estimated population living within 1 km of the water point | \`\``{r} #| echo: off #| output: asis sum(data$local_population, na.rm = TRUE)` | `r mean(data$local_population, na.rm = TRUE)` | `r median(data$local_population, na.rm = TRUE)` | `r sd(data$local_population, na.rm = TRUE)` |
-| 2 | assigned_population | Number of people officially assigned to the water point | `r sum(data$assigned_population, na.rm = TRUE)` | `r mean(data$assigned_population, na.rm = TRUE)` | `r median(data$assigned_population, na.rm = TRUE)` | `r sd(data$assigned_population, na.rm = TRUE)` |
-| 3 | usage_cap | Estimated usage capacity | `r sum(data$usage_cap, na.rm = TRUE)` | `r mean(data$usage_cap, na.rm = TRUE)` | `r median(data$usage_cap, na.rm = TRUE)` | `r sd(data$usage_cap, na.rm = TRUE)` |
-| 4 | pressure | Usage pressure indicator. Higher pressure means higher service load. | `r sum(data$pressure, na.rm = TRUE)` | `r mean(data$pressure, na.rm = TRUE)` | `r median(data$pressure, na.rm = TRUE)` | `r sd(data$pressure, na.rm = TRUE)` |
-| 5 | distance_to_city | Distance from water point to nearest city. Helps understand remoteness. | `r sum(data$distance_to_city, na.rm = TRUE)` | `r mean(data$distance_to_city, na.rm = TRUE)` | `r median(data$distance_to_city, na.rm = TRUE)` | `r sd(data$distance_to_city, na.rm = TRUE)` |
+```{r}
+#| label: tbl-statistics
+#| tbl-cap: Summary of Key Variables
 
-: Table 1: Summary table for the key variables
+data |>
+  select(local_population, assigned_population, usage_cap, pressure, distance_to_city) |>
+  pivot_longer(
+    cols = everything(),
+    names_to = "Variable",
+    values_to = "Value"
+  ) |>
+  group_by(Variable) |>
+  summarise(
+    Mean = mean(Value, na.rm = TRUE),
+    Median = median(Value, na.rm = TRUE),
+    `Std. Dev` = sd(Value, na.rm = TRUE)
+  ) |>
+    gt() |>
+  tab_header(title = "Summary of Key Variables",
+             subtitle = "Summary per waterpoint")  |>
+fmt_number(
+    columns = vars(Mean, Median, `Std. Dev`),
+    decimals = 0,
+    use_seps = TRUE
+  ) 
+
+```
+
+In @tbl-statistics, you can see that standard deviation is generally big. The High SD means that the population assigned to water points varies hugely. Some water points serve very few people, others serve more.
+
+Furthermore,in the same @tbl-statistics, the small mean and median but larger SD for pressure suggests that pressure values are skewed. some points have extreme under usage unlike others.
+
+## Bibliography
+
+[@wpdx_uga]
+
+[@nsubuga2014water]
+
+[@wickham2019]
 
