@@ -115,53 +115,26 @@ This scatter plot shows the relationship between pressure (how heavily a water p
 
 
 ::: {#tbl-statistics .cell tbl-cap='Summary of Key Variables'}
-
-```{.r .cell-code}
-data |>
-  select(local_population, assigned_population, usage_cap, pressure, distance_to_city) |>
-  pivot_longer(
-    cols = everything(),
-    names_to = "Variable",
-    values_to = "Value"
-  ) |>
-  group_by(Variable) |>
-  summarise(
-    Mean = mean(Value, na.rm = TRUE),
-    Median = median(Value, na.rm = TRUE),
-    `Std. Dev` = sd(Value, na.rm = TRUE)
-  ) |>
-  gt() |>
-  tab_header(
-    title = "Summary of Key Variables",
-    subtitle = "Summary per waterpoint"
-  ) |>
-  fmt_number(
-    columns = c(Mean, Median, `Std. Dev`),
-    decimals = 0,
-    use_seps = TRUE
-  )
-```
-
 ::: {.cell-output-display}
 
 ```{=html}
-<div id="aosesbsksv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#aosesbsksv table {
+<div id="snlobaagqv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#snlobaagqv table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#aosesbsksv thead, #aosesbsksv tbody, #aosesbsksv tfoot, #aosesbsksv tr, #aosesbsksv td, #aosesbsksv th {
+#snlobaagqv thead, #snlobaagqv tbody, #snlobaagqv tfoot, #snlobaagqv tr, #snlobaagqv td, #snlobaagqv th {
   border-style: none;
 }
 
-#aosesbsksv p {
+#snlobaagqv p {
   margin: 0;
   padding: 0;
 }
 
-#aosesbsksv .gt_table {
+#snlobaagqv .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -187,12 +160,12 @@ data |>
   border-left-color: #D3D3D3;
 }
 
-#aosesbsksv .gt_caption {
+#snlobaagqv .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#aosesbsksv .gt_title {
+#snlobaagqv .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -204,7 +177,7 @@ data |>
   border-bottom-width: 0;
 }
 
-#aosesbsksv .gt_subtitle {
+#snlobaagqv .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -216,7 +189,7 @@ data |>
   border-top-width: 0;
 }
 
-#aosesbsksv .gt_heading {
+#snlobaagqv .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -228,13 +201,13 @@ data |>
   border-right-color: #D3D3D3;
 }
 
-#aosesbsksv .gt_bottom_border {
+#snlobaagqv .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#aosesbsksv .gt_col_headings {
+#snlobaagqv .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -249,7 +222,7 @@ data |>
   border-right-color: #D3D3D3;
 }
 
-#aosesbsksv .gt_col_heading {
+#snlobaagqv .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -269,7 +242,7 @@ data |>
   overflow-x: hidden;
 }
 
-#aosesbsksv .gt_column_spanner_outer {
+#snlobaagqv .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -281,15 +254,15 @@ data |>
   padding-right: 4px;
 }
 
-#aosesbsksv .gt_column_spanner_outer:first-child {
+#snlobaagqv .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#aosesbsksv .gt_column_spanner_outer:last-child {
+#snlobaagqv .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#aosesbsksv .gt_column_spanner {
+#snlobaagqv .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -301,11 +274,11 @@ data |>
   width: 100%;
 }
 
-#aosesbsksv .gt_spanner_row {
+#snlobaagqv .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#aosesbsksv .gt_group_heading {
+#snlobaagqv .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -331,7 +304,7 @@ data |>
   text-align: left;
 }
 
-#aosesbsksv .gt_empty_group_heading {
+#snlobaagqv .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -346,15 +319,15 @@ data |>
   vertical-align: middle;
 }
 
-#aosesbsksv .gt_from_md > :first-child {
+#snlobaagqv .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#aosesbsksv .gt_from_md > :last-child {
+#snlobaagqv .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#aosesbsksv .gt_row {
+#snlobaagqv .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -373,7 +346,7 @@ data |>
   overflow-x: hidden;
 }
 
-#aosesbsksv .gt_stub {
+#snlobaagqv .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -386,7 +359,7 @@ data |>
   padding-right: 5px;
 }
 
-#aosesbsksv .gt_stub_row_group {
+#snlobaagqv .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -400,15 +373,15 @@ data |>
   vertical-align: top;
 }
 
-#aosesbsksv .gt_row_group_first td {
+#snlobaagqv .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#aosesbsksv .gt_row_group_first th {
+#snlobaagqv .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#aosesbsksv .gt_summary_row {
+#snlobaagqv .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -418,16 +391,16 @@ data |>
   padding-right: 5px;
 }
 
-#aosesbsksv .gt_first_summary_row {
+#snlobaagqv .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#aosesbsksv .gt_first_summary_row.thick {
+#snlobaagqv .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#aosesbsksv .gt_last_summary_row {
+#snlobaagqv .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -437,7 +410,7 @@ data |>
   border-bottom-color: #D3D3D3;
 }
 
-#aosesbsksv .gt_grand_summary_row {
+#snlobaagqv .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -447,7 +420,7 @@ data |>
   padding-right: 5px;
 }
 
-#aosesbsksv .gt_first_grand_summary_row {
+#snlobaagqv .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -457,7 +430,7 @@ data |>
   border-top-color: #D3D3D3;
 }
 
-#aosesbsksv .gt_last_grand_summary_row_top {
+#snlobaagqv .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -467,11 +440,11 @@ data |>
   border-bottom-color: #D3D3D3;
 }
 
-#aosesbsksv .gt_striped {
+#snlobaagqv .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#aosesbsksv .gt_table_body {
+#snlobaagqv .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -480,7 +453,7 @@ data |>
   border-bottom-color: #D3D3D3;
 }
 
-#aosesbsksv .gt_footnotes {
+#snlobaagqv .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -494,7 +467,7 @@ data |>
   border-right-color: #D3D3D3;
 }
 
-#aosesbsksv .gt_footnote {
+#snlobaagqv .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -503,7 +476,7 @@ data |>
   padding-right: 5px;
 }
 
-#aosesbsksv .gt_sourcenotes {
+#snlobaagqv .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -517,7 +490,7 @@ data |>
   border-right-color: #D3D3D3;
 }
 
-#aosesbsksv .gt_sourcenote {
+#snlobaagqv .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -525,72 +498,72 @@ data |>
   padding-right: 5px;
 }
 
-#aosesbsksv .gt_left {
+#snlobaagqv .gt_left {
   text-align: left;
 }
 
-#aosesbsksv .gt_center {
+#snlobaagqv .gt_center {
   text-align: center;
 }
 
-#aosesbsksv .gt_right {
+#snlobaagqv .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#aosesbsksv .gt_font_normal {
+#snlobaagqv .gt_font_normal {
   font-weight: normal;
 }
 
-#aosesbsksv .gt_font_bold {
+#snlobaagqv .gt_font_bold {
   font-weight: bold;
 }
 
-#aosesbsksv .gt_font_italic {
+#snlobaagqv .gt_font_italic {
   font-style: italic;
 }
 
-#aosesbsksv .gt_super {
+#snlobaagqv .gt_super {
   font-size: 65%;
 }
 
-#aosesbsksv .gt_footnote_marks {
+#snlobaagqv .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#aosesbsksv .gt_asterisk {
+#snlobaagqv .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#aosesbsksv .gt_indent_1 {
+#snlobaagqv .gt_indent_1 {
   text-indent: 5px;
 }
 
-#aosesbsksv .gt_indent_2 {
+#snlobaagqv .gt_indent_2 {
   text-indent: 10px;
 }
 
-#aosesbsksv .gt_indent_3 {
+#snlobaagqv .gt_indent_3 {
   text-indent: 15px;
 }
 
-#aosesbsksv .gt_indent_4 {
+#snlobaagqv .gt_indent_4 {
   text-indent: 20px;
 }
 
-#aosesbsksv .gt_indent_5 {
+#snlobaagqv .gt_indent_5 {
   text-indent: 25px;
 }
 
-#aosesbsksv .katex-display {
+#snlobaagqv .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#aosesbsksv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#snlobaagqv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -645,10 +618,8 @@ In @tbl-statistics, you can see that standard deviation is generally big. The Hi
 
 Furthermore,in the same @tbl-statistics, the small mean and median but larger SD for pressure suggests that pressure values are skewed. some points have extreme under usage unlike others.
 
-## Bibliography
+## Conclusion
 
-@wpdx_uga
+The analysis demonstrates substantial variability in water point usage, population served, and proximity characteristics, highlighting uneven service distribution and emphasizing the need for targeted interventions to improve equitable access and system reliability across Uganda.
 
-@nsubuga2014water
-
-@wickham2019
+This dataset is sourced from WPdx [@wpdxuga] and supported by earlier studies such as @nsubuga2014water. The analysis approach draws on principles from the Tidyverse ecosystem [@wickham2019].

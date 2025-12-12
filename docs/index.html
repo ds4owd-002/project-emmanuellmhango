@@ -21,41 +21,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 /* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
@@ -195,29 +160,6 @@ The primary goals of analyzing this dataset are:</p>
 <section id="summary-of-the-5-selected-data-variables" class="level2">
 <h2 class="anchored" data-anchor-id="summary-of-the-5-selected-data-variables">Summary of the 5 selected data variables</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(local_population, assigned_population, usage_cap, pressure, distance_to_city) <span class="sc">|&gt;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">everything</span>(),</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"Variable"</span>,</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"Value"</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Variable) <span class="sc">|&gt;</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">Mean =</span> <span class="fu">mean</span>(Value, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">Median =</span> <span class="fu">median</span>(Value, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Std. Dev</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sd</span>(Value, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Summary of Key Variables"</span>,</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Summary per waterpoint"</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">c</span>(Mean, Median, <span class="st">`</span><span class="at">Std. Dev</span><span class="st">`</span>),</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">0</span>,</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">use_seps =</span> <span class="cn">TRUE</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div id="tbl-statistics" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-statistics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -225,23 +167,23 @@ Table&nbsp;1: Summary of Key Variables
 </figcaption>
 <div aria-describedby="tbl-statistics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="aosesbsksv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#aosesbsksv table {
+<div id="snlobaagqv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#snlobaagqv table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#aosesbsksv thead, #aosesbsksv tbody, #aosesbsksv tfoot, #aosesbsksv tr, #aosesbsksv td, #aosesbsksv th {
+#snlobaagqv thead, #snlobaagqv tbody, #snlobaagqv tfoot, #snlobaagqv tr, #snlobaagqv td, #snlobaagqv th {
   border-style: none;
 }
 
-#aosesbsksv p {
+#snlobaagqv p {
   margin: 0;
   padding: 0;
 }
 
-#aosesbsksv .gt_table {
+#snlobaagqv .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -267,12 +209,12 @@ Table&nbsp;1: Summary of Key Variables
   border-left-color: #D3D3D3;
 }
 
-#aosesbsksv .gt_caption {
+#snlobaagqv .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#aosesbsksv .gt_title {
+#snlobaagqv .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -284,7 +226,7 @@ Table&nbsp;1: Summary of Key Variables
   border-bottom-width: 0;
 }
 
-#aosesbsksv .gt_subtitle {
+#snlobaagqv .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -296,7 +238,7 @@ Table&nbsp;1: Summary of Key Variables
   border-top-width: 0;
 }
 
-#aosesbsksv .gt_heading {
+#snlobaagqv .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -308,13 +250,13 @@ Table&nbsp;1: Summary of Key Variables
   border-right-color: #D3D3D3;
 }
 
-#aosesbsksv .gt_bottom_border {
+#snlobaagqv .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#aosesbsksv .gt_col_headings {
+#snlobaagqv .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -329,7 +271,7 @@ Table&nbsp;1: Summary of Key Variables
   border-right-color: #D3D3D3;
 }
 
-#aosesbsksv .gt_col_heading {
+#snlobaagqv .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -349,7 +291,7 @@ Table&nbsp;1: Summary of Key Variables
   overflow-x: hidden;
 }
 
-#aosesbsksv .gt_column_spanner_outer {
+#snlobaagqv .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -361,15 +303,15 @@ Table&nbsp;1: Summary of Key Variables
   padding-right: 4px;
 }
 
-#aosesbsksv .gt_column_spanner_outer:first-child {
+#snlobaagqv .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#aosesbsksv .gt_column_spanner_outer:last-child {
+#snlobaagqv .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#aosesbsksv .gt_column_spanner {
+#snlobaagqv .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -381,11 +323,11 @@ Table&nbsp;1: Summary of Key Variables
   width: 100%;
 }
 
-#aosesbsksv .gt_spanner_row {
+#snlobaagqv .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#aosesbsksv .gt_group_heading {
+#snlobaagqv .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -411,7 +353,7 @@ Table&nbsp;1: Summary of Key Variables
   text-align: left;
 }
 
-#aosesbsksv .gt_empty_group_heading {
+#snlobaagqv .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -426,15 +368,15 @@ Table&nbsp;1: Summary of Key Variables
   vertical-align: middle;
 }
 
-#aosesbsksv .gt_from_md > :first-child {
+#snlobaagqv .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#aosesbsksv .gt_from_md > :last-child {
+#snlobaagqv .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#aosesbsksv .gt_row {
+#snlobaagqv .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -453,7 +395,7 @@ Table&nbsp;1: Summary of Key Variables
   overflow-x: hidden;
 }
 
-#aosesbsksv .gt_stub {
+#snlobaagqv .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -466,7 +408,7 @@ Table&nbsp;1: Summary of Key Variables
   padding-right: 5px;
 }
 
-#aosesbsksv .gt_stub_row_group {
+#snlobaagqv .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -480,15 +422,15 @@ Table&nbsp;1: Summary of Key Variables
   vertical-align: top;
 }
 
-#aosesbsksv .gt_row_group_first td {
+#snlobaagqv .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#aosesbsksv .gt_row_group_first th {
+#snlobaagqv .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#aosesbsksv .gt_summary_row {
+#snlobaagqv .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -498,16 +440,16 @@ Table&nbsp;1: Summary of Key Variables
   padding-right: 5px;
 }
 
-#aosesbsksv .gt_first_summary_row {
+#snlobaagqv .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#aosesbsksv .gt_first_summary_row.thick {
+#snlobaagqv .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#aosesbsksv .gt_last_summary_row {
+#snlobaagqv .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -517,7 +459,7 @@ Table&nbsp;1: Summary of Key Variables
   border-bottom-color: #D3D3D3;
 }
 
-#aosesbsksv .gt_grand_summary_row {
+#snlobaagqv .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -527,7 +469,7 @@ Table&nbsp;1: Summary of Key Variables
   padding-right: 5px;
 }
 
-#aosesbsksv .gt_first_grand_summary_row {
+#snlobaagqv .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -537,7 +479,7 @@ Table&nbsp;1: Summary of Key Variables
   border-top-color: #D3D3D3;
 }
 
-#aosesbsksv .gt_last_grand_summary_row_top {
+#snlobaagqv .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -547,11 +489,11 @@ Table&nbsp;1: Summary of Key Variables
   border-bottom-color: #D3D3D3;
 }
 
-#aosesbsksv .gt_striped {
+#snlobaagqv .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#aosesbsksv .gt_table_body {
+#snlobaagqv .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -560,7 +502,7 @@ Table&nbsp;1: Summary of Key Variables
   border-bottom-color: #D3D3D3;
 }
 
-#aosesbsksv .gt_footnotes {
+#snlobaagqv .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -574,7 +516,7 @@ Table&nbsp;1: Summary of Key Variables
   border-right-color: #D3D3D3;
 }
 
-#aosesbsksv .gt_footnote {
+#snlobaagqv .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -583,7 +525,7 @@ Table&nbsp;1: Summary of Key Variables
   padding-right: 5px;
 }
 
-#aosesbsksv .gt_sourcenotes {
+#snlobaagqv .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -597,7 +539,7 @@ Table&nbsp;1: Summary of Key Variables
   border-right-color: #D3D3D3;
 }
 
-#aosesbsksv .gt_sourcenote {
+#snlobaagqv .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -605,72 +547,72 @@ Table&nbsp;1: Summary of Key Variables
   padding-right: 5px;
 }
 
-#aosesbsksv .gt_left {
+#snlobaagqv .gt_left {
   text-align: left;
 }
 
-#aosesbsksv .gt_center {
+#snlobaagqv .gt_center {
   text-align: center;
 }
 
-#aosesbsksv .gt_right {
+#snlobaagqv .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#aosesbsksv .gt_font_normal {
+#snlobaagqv .gt_font_normal {
   font-weight: normal;
 }
 
-#aosesbsksv .gt_font_bold {
+#snlobaagqv .gt_font_bold {
   font-weight: bold;
 }
 
-#aosesbsksv .gt_font_italic {
+#snlobaagqv .gt_font_italic {
   font-style: italic;
 }
 
-#aosesbsksv .gt_super {
+#snlobaagqv .gt_super {
   font-size: 65%;
 }
 
-#aosesbsksv .gt_footnote_marks {
+#snlobaagqv .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#aosesbsksv .gt_asterisk {
+#snlobaagqv .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#aosesbsksv .gt_indent_1 {
+#snlobaagqv .gt_indent_1 {
   text-indent: 5px;
 }
 
-#aosesbsksv .gt_indent_2 {
+#snlobaagqv .gt_indent_2 {
   text-indent: 10px;
 }
 
-#aosesbsksv .gt_indent_3 {
+#snlobaagqv .gt_indent_3 {
   text-indent: 15px;
 }
 
-#aosesbsksv .gt_indent_4 {
+#snlobaagqv .gt_indent_4 {
   text-indent: 20px;
 }
 
-#aosesbsksv .gt_indent_5 {
+#snlobaagqv .gt_indent_5 {
   text-indent: 25px;
 }
 
-#aosesbsksv .katex-display {
+#snlobaagqv .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#aosesbsksv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#snlobaagqv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -733,15 +675,17 @@ Table&nbsp;1: Summary of Key Variables
 <p>In <a href="#tbl-statistics" class="quarto-xref">Table&nbsp;1</a>, you can see that standard deviation is generally big. The High SD means that the population assigned to water points varies hugely. Some water points serve very few people, others serve more.</p>
 <p>Furthermore,in the same <a href="#tbl-statistics" class="quarto-xref">Table&nbsp;1</a>, the small mean and median but larger SD for pressure suggests that pressure values are skewed. some points have extreme under usage unlike others.</p>
 </section>
-<section id="bibliography" class="level2">
-<h2 class="anchored" data-anchor-id="bibliography">Bibliography</h2>
-<p><span class="citation" data-cites="wpdx_uga">(<a href="#ref-wpdx_uga" role="doc-biblioref"><strong>wpdx_uga?</strong></a>)</span></p>
-<p><span class="citation" data-cites="nsubuga2014water">Nsubuga, Namutebi, and Nsubuga-Ssenfuma (<a href="#ref-nsubuga2014water" role="doc-biblioref">2014</a>)</span></p>
-<p><span class="citation" data-cites="wickham2019">Wickham et al. (<a href="#ref-wickham2019" role="doc-biblioref">2019</a>)</span></p>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>The analysis demonstrates substantial variability in water point usage, population served, and proximity characteristics, highlighting uneven service distribution and emphasizing the need for targeted interventions to improve equitable access and system reliability across Uganda.</p>
+<p>This dataset is sourced from WPdx <span class="citation" data-cites="wpdxuga">(<a href="#ref-wpdxuga" role="doc-biblioref">Exchange 2023</a>)</span> and supported by earlier studies such as <span class="citation" data-cites="nsubuga2014water">Nsubuga, Namutebi, and Nsubuga-Ssenfuma (<a href="#ref-nsubuga2014water" role="doc-biblioref">2014</a>)</span>. The analysis approach draws on principles from the Tidyverse ecosystem <span class="citation" data-cites="wickham2019">(<a href="#ref-wickham2019" role="doc-biblioref">Wickham et al. 2019</a>)</span>.</p>
 
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-wpdxuga" class="csl-entry" role="listitem">
+Exchange, Water Point Data. 2023. <span>“Water Point Data Exchange (UGA).”</span>
+</div>
 <div id="ref-nsubuga2014water" class="csl-entry" role="listitem">
 Nsubuga, Francis NW, Edith N Namutebi, and Masoud Nsubuga-Ssenfuma. 2014. <span>“Water Resources of Uganda: An Assessment and Review.”</span>
 </div>

@@ -170,6 +170,8 @@ data |>
 ## Summary of the 5 selected data variables
 
 ```{r}
+#| echo: false
+#| warning: false
 #| label: tbl-statistics
 #| tbl-cap: Summary of Key Variables
 
@@ -203,10 +205,8 @@ In @tbl-statistics, you can see that standard deviation is generally big. The Hi
 
 Furthermore,in the same @tbl-statistics, the small mean and median but larger SD for pressure suggests that pressure values are skewed. some points have extreme under usage unlike others.
 
-## Bibliography
+## Conclusion
 
-@wpdx_uga
+The analysis demonstrates substantial variability in water point usage, population served, and proximity characteristics, highlighting uneven service distribution and emphasizing the need for targeted interventions to improve equitable access and system reliability across Uganda.
 
-@nsubuga2014water
-
-@wickham2019
+This dataset is sourced from WPdx [@wpdxuga] and supported by earlier studies such as @nsubuga2014water. The analysis approach draws on principles from the Tidyverse ecosystem [@wickham2019].
