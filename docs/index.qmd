@@ -4,6 +4,8 @@ format: html
 editor: visual
 author: "Emmanuel Mhango"
 bibliography: bibliography.bib
+execute:
+  keep-md: true
 ---
 
 ## Uganda Waterpoints
@@ -155,7 +157,7 @@ data |>
   drop_na(pressure, criticality) |>
   ggplot(aes(x = pressure, y = criticality)) +
   geom_point(alpha = 0.4, size = 2, color = "steelblue") +
-  geom_smooth(method = "loess", se = FALSE, color = "red") +
+  geom_smooth(method = "gam", formula = y ~ s(x), se = FALSE, color = "red") +
   labs(
     title = "Criticality vs Pressure",
     x = "Pressure (Usage Pressure)",
@@ -184,14 +186,16 @@ data |>
     Median = median(Value, na.rm = TRUE),
     `Std. Dev` = sd(Value, na.rm = TRUE)
   ) |>
-    gt() |>
-  tab_header(title = "Summary of Key Variables",
-             subtitle = "Summary per waterpoint")  |>
-fmt_number(
-    columns = vars(Mean, Median, `Std. Dev`),
+  gt() |>
+  tab_header(
+    title = "Summary of Key Variables",
+    subtitle = "Summary per waterpoint"
+  ) |>
+  fmt_number(
+    columns = c(Mean, Median, `Std. Dev`),
     decimals = 0,
     use_seps = TRUE
-  ) 
+  )
 
 ```
 
@@ -201,8 +205,8 @@ Furthermore,in the same @tbl-statistics, the small mean and median but larger SD
 
 ## Bibliography
 
-[@wpdx_uga]
+@wpdx_uga
 
-[@nsubuga2014water]
+@nsubuga2014water
 
-[@wickham2019]
+@wickham2019
